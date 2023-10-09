@@ -19,12 +19,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const element = document.getElementById(elementId);
     if (element) {
       incrementRate = (100 + Number(incrementRate)) / 100
-      console.log(incrementRate)
       var elementVal = element.textContent
       elementVal = Number(elementVal.substring(0, elementVal.indexOf(",")).replaceAll(".", ""))
       elementVal *= incrementRate
       //console.log("elementVal: " + elementVal)
-      alert("Value of element with ID" + elementId + ": " + elementVal);
+      alert("New Value of element with ID" + elementId + ": " + elementVal);
     } else {
       alert(`Element with ID "${elementId}" not found on this page.`);
     }
