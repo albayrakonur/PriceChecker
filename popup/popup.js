@@ -1,31 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const getValueBtn = document.getElementById("getValueBtn");
-  
-    getValueBtn.addEventListener("click", function () {
-      alert("sa")
-      const inputId = document.getElementById("inputId").value;
-      const output = document.getElementById("output");
-  
-      chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.scripting.executeScript(
-          {
-            target: { tabId: tabs[0].id },
-            function: getValue,
-            args: [inputId],
-          },
-          function (result) {
-            const value = result[0].result;
-            output.innerHTML = `Value of input element with ID "${inputId}": <strong>${value}</strong>`;
-          }
-        );
+  const displayButton = document.getElementById("displayButton");
+
+  displayButton.addEventListener("click", function () {
+    const elementId = document.getElementById("elementId").value;
+    const incrementRate = document.getElementById("incrementRate").value;
+
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      const activeTab = tabs[0];
+      chrome.scripting.executeScript({
+        target: { tabId: activeTab.id },
+        function: displayElementValue,
+        args: [elementId, incrementRate],
       });
     });
   });
-  
-  function getValue(inputId) {
-    const inputElement = document.getElementById(inputId);
-    if (inputElement) {
-      return inputElement.value;
+
+  function displayElementValue(elementId, incrementRate) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      incrementRate = (100 + Number(incrementRate)) / 100
+      console.log(incrementRate)
+      var elementVal = element.textContent
+      elementVal = Number(elementVal.substring(0, elementVal.indexOf(",")).replaceAll(".", ""))
+      elementVal *= incrementRate
+      //console.log("elementVal: " + elementVal)
+      alert("Value of element with ID" + elementId + ": " + elementVal);
+    } else {
+      alert(`Element with ID "${elementId}" not found on this page.`);
     }
-    return null;
-  }  
+  }
+});

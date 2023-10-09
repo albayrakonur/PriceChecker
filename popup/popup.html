@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./popup.css" />
+    <title>Element Value Displayer</title>
+    <script src="popup.js"></script>
 </head>
 
 <body>
-
-    <body>
-        <h2>Input Value Viewer</h2>
-        <label for="inputId">Input Element ID:</label>
-        <input type="text" id="inputId" placeholder="Enter input element ID">
-        <button id="getValueBtn">Get Value</button>
-        <div id="output"></div>
-    </body>
-
-    <script src="./popup.js" type="module"></script>
+    <h2>Display Element Value by ID</h2>
+    <label for="elementId">Element ID:</label>
+    <input type="text" id="elementId" placeholder="Enter Element ID">
+    <label for="incrementRate">Element ID:</label>
+    <input type="text" id="incrementRate" placeholder="Enter increment rate">
+    <br>
+    <button id="displayButton">Display Value</button>
 </body>
 
 </html>
